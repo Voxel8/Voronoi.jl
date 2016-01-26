@@ -5,6 +5,10 @@ module Voronoi
         const library_path = Pkg.dir("Voronoi") * "\\src\\voronoi.dll"
     end
 
+    @unix_only begin
+        const library_path = Pkg.dir("Voronoi") * "/src/voronoi.so"
+    end
+
     type Point
         X::Int32
         Y::Int32

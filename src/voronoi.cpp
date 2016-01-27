@@ -21,57 +21,57 @@ extern "C" {
     construct_voronoi(points.begin(), points.end(), segments.begin(), segments.end(), &vd);
 
     std::set<const voronoi_edge<double> *> visited;
-  	std::map<const voronoi_vertex<double> *, long long> vertexMap;
+    std::map<const voronoi_vertex<double> *, long long> vertexMap;
 
-		size_t vertexCount = 1;
+    size_t vertexCount = 1;
 
-  	for (voronoi_diagram<double>::const_edge_iterator it = vd.edges().begin(); 	it != vd.edges().end(); ++it) {
-  		if (visited.find(&(*it)) != visited.end())
-  			continue;
+    for (voronoi_diagram<double>::const_edge_iterator it = vd.edges().begin();  it != vd.edges().end(); ++it) {
+      if (visited.find(&(*it)) != visited.end())
+        continue;
 
-  		const voronoi_vertex<double> *start = it->vertex0();
-  		const voronoi_vertex<double> *end = it->vertex1();
+      const voronoi_vertex<double> *start = it->vertex0();
+      const voronoi_vertex<double> *end = it->vertex1();
 
-  		size_t startIndex = 0;
-  		if (start != 0) {
-  			std::map<const voronoi_vertex<double> *, long long>::iterator it = vertexMap.find(start);
+      size_t startIndex = 0;
+      if (start != 0) {
+        std::map<const voronoi_vertex<double> *, long long>::iterator it = vertexMap.find(start);
 
-  			if (it == vertexMap.end())
-  			{
-  				c_Vertex startVertex = c_Vertex(start->x(), start->y());
-  				startIndex = vertexCount++;
-  				appendVertex(vertexArray, startVertex);
-  				vertexMap[start] = startIndex;
-  			}
-  			else {
-  				startIndex = it->second;
-  			}
-  		}
+        if (it == vertexMap.end())
+        {
+          c_Vertex startVertex = c_Vertex(start->x(), start->y());
+          startIndex = vertexCount++;
+          appendVertex(vertexArray, startVertex);
+          vertexMap[start] = startIndex;
+        }
+        else {
+          startIndex = it->second;
+        }
+      }
 
-  		size_t endIndex = 0;
-  		if (end != 0) {
-  			std::map<const voronoi_vertex<double> *, long long>::iterator it = vertexMap.find(end);
+      size_t endIndex = 0;
+      if (end != 0) {
+        std::map<const voronoi_vertex<double> *, long long>::iterator it = vertexMap.find(end);
 
-  			if (it == vertexMap.end())
-  			{
-  				c_Vertex endVertex = c_Vertex(end->x(), end->y());
-  				endIndex = vertexCount++;
-  				appendVertex(vertexArray, endVertex);
-  				vertexMap[end] = endIndex;
-  			}
-  			else {
-  				endIndex = it->second;
-  			}
-  		}
+        if (it == vertexMap.end())
+        {
+          c_Vertex endVertex = c_Vertex(end->x(), end->y());
+          endIndex = vertexCount++;
+          appendVertex(vertexArray, endVertex);
+          vertexMap[end] = endIndex;
+        }
+        else {
+          endIndex = it->second;
+        }
+      }
 
-  		size_t firstIndex = it->cell()->source_index() + 1;
+      size_t firstIndex = it->cell()->source_index() + 1;
 
-  		const voronoi_edge<double> *twin = it->twin();
-  		visited.insert(twin);
+      const voronoi_edge<double> *twin = it->twin();
+      visited.insert(twin);
 
-  		size_t secondIndex = twin->cell()->source_index() + 1;
+      size_t secondIndex = twin->cell()->source_index() + 1;
 
-  		appendEdge(edgeArray, c_Edge(startIndex, endIndex, it->is_primary(), firstIndex, secondIndex));
-  	}
+      appendEdge(edgeArray, c_Edge(startIndex, endIndex, it->is_primary(), firstIndex, secondIndex));
+    }
   }
 }

@@ -1,13 +1,30 @@
 #include "voronoi.hpp"
 #include "stdio.h"
 
+#if defined _WIN32 || defined __CYGWIN__
+  #ifdef __GNUC__
+    #define CDECL __attribute__ ((cdecl))
+    #define DLL_PUBLIC __attribute__ ((dllexport))
+  #else
+    #define CDECL __cdecl
+    #define DLL_PUBLIC __declspec(dllexport)
+  #endif
+#else
+  #define CDECL __attribute__ ((cdecl))
+  #if __GNUC__ >= 4
+    #define DLL_PUBLIC __attribute__ ((visibility ("default")))
+  #else
+    #define DLL_PUBLIC
+  #endif
+#endif
+
 extern "C" {
-  __declspec(dllexport) void __cdecl get_edges(int** ps, size_t pointCount,
-                                               int** ss, size_t segmentCount,
-                                               void* vertexArray,
-                                               void(*appendVertex)(void* outputArray, c_Vertex vertex),
-                                               void* edgeArray,
-                                               void(*appendEdge)(void* outputArray, c_Edge edge)) {
+  DLL_PUBLIC void CDECL get_edges(int** ps, size_t pointCount,
+                                  int** ss, size_t segmentCount,
+                                  void* vertexArray,
+                                  void(*appendVertex)(void* outputArray, c_Vertex vertex),
+                                  void* edgeArray,
+                                  void(*appendEdge)(void* outputArray, c_Edge edge)) {
     std::vector<Point> points;
     std::vector<Segment> segments;
     voronoi_diagram<double> vd;

@@ -13,8 +13,11 @@ addons:
       - g++-4.8
 sudo: required
 install:
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20
-  - g++ --version
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20
+      g++ --version
+    fi
 julia:
   - release
   - nightly
@@ -23,4 +26,4 @@ notifications:
 # uncomment the following lines to override the default test script
 #script:
 #  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#  - julia -e 'Pkg.clone(pwd()); Pkg.build("Voronoi"); Pkg.test("Voronoi"; coverage=true)'
+#  - julia -e 'Pkg.clone(pwd()); Pkg.build("Clipper"); Pkg.test("Clipper"; coverage=true)'

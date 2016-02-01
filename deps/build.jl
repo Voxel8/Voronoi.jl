@@ -1,6 +1,6 @@
 #! /usr/bin/env julia
 
-pkg_dir = Pkg.dir("Voronoi")
+pkg_dir = dirname(dirname(@__FILE__))
 
 @windows_only begin
     try

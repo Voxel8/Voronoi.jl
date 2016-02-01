@@ -2,11 +2,11 @@ module Voronoi
     export Point, Segment, Vertex, Edge, get_edges
 
     @windows_only begin
-        const library_path = Pkg.dir("Voronoi") * "\\src\\voronoi.dll"
+        const library_path =  joinpath(dirname(@__FILE__), "voronoi.dll")
     end
 
     @unix_only begin
-        const library_path = Pkg.dir("Voronoi") * "/src/voronoi.so"
+        const library_path = joinpath(dirname(@__FILE__), "voronoi.so")
     end
 
     type Point

@@ -11,8 +11,9 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+sudo: required
 install:
-  - update-alternatives --query g++
+  - sudo update-alternatives --query g++
   - g++ --version
 julia:
   - release

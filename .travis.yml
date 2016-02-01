@@ -13,7 +13,7 @@ addons:
       - g++-4.8
 sudo: required
 install:
-  - sudo update-alternatives --query g++
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20
   - g++ --version
 julia:
   - release

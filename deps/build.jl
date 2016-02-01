@@ -15,7 +15,8 @@ end
 
 @unix_only begin
     cd("$(pkg_dir)/src") do
-        run(`g++ -c -fPIC -std=c++11 -stdlib=libc++ voronoi.cpp`)
+        # Note: on Mac OS X, g++ is aliased to clang++.
+        run(`g++ -c -fPIC -std=c++11 -I. voronoi.cpp`)
         run(`g++ -shared -o voronoi.so voronoi.o`)
     end
 end

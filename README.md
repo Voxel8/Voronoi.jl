@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/Voxel8/Voronoi.jl.svg?branch=master)](https://travis-ci.org/Voxel8/Voronoi.jl)
+
+[![Build status](https://ci.appveyor.com/api/projects/status/0uy0q4prxwon3gee?svg=true)](https://ci.appveyor.com/project/maxvoxel8/voronoi-jl)
+
 # Voronoi
 
 A wrapper for the [Boost Voronoi](http://www.boost.org/doc/libs/1_53_0_beta1/libs/polygon/doc/voronoi_main.htm) library,

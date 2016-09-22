@@ -1,11 +1,11 @@
 module Voronoi
     export Point, Segment, Vertex, Edge, get_edges
 
-    @windows_only begin
+    @static if is_windows()
         const library_path =  joinpath(dirname(@__FILE__), "voronoi.dll")
     end
 
-    @unix_only begin
+    @static if is_unix()
         const library_path = joinpath(dirname(@__FILE__), "voronoi.so")
     end
 

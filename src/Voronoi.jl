@@ -10,8 +10,8 @@ module Voronoi
     end
 
     type Point
-        X::Int32
-        Y::Int32
+        X::Int64
+        Y::Int64
     end
 
     type Segment

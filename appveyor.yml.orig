@@ -1,7 +1,10 @@
 environment:
   matrix:
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.5/julia-0.5-latest-win64.exe"
+<<<<<<< af42eefeea79b4a94d09bde17065e7e966b7fb5b
+=======
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
+>>>>>>> Switch to gcc compiler on Windows. Switch to using int64 input types.
   - JULIA_URL: "https://julialangnightlies-s3.julialang.org/bin/winnt/x64/julia-latest-win64.exe"
 
 branches:

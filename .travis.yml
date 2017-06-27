@@ -1,29 +1,40 @@
 # Documentation: http://docs.travis-ci.com/user/languages/julia/
-language: julia
-os:
-  - linux
-  - osx
-env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
 sudo: required
-install:
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20
-      g++ --version
-    fi
-julia:
-  - 0.5
-  - nightly
 notifications:
   email: false
-# uncomment the following lines to override the default test script
-#script:
-#  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#  - julia -e 'Pkg.clone(pwd()); Pkg.build("Clipper"); Pkg.test("Clipper"; coverage=true)'
+
+matrix:
+  include:
+    - language: julia
+      os: osx
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - g++-4.8
+    - language: julia
+      os: linux
+      dist: trusty
+      compiler:
+        - gcc
+      addons:
+        apt:
+            sources:
+            - ubuntu-toolchain-r-test
+            packages:
+            - gcc-6
+            - g++-6
+            - cmake
+      script:
+        # Link gcc-6 and g++-6 to their standard commands
+        - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
+        - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+        # Export CC and CXX to tell cmake which compiler to use
+        - export CC=/usr/bin/gcc-6
+        - export CXX=/usr/bin/g++-6
+        # Check versions of gcc, g++ and cmake
+        - gcc -v && g++ -v && cmake --version
+        # Run your build commands next
+        - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+        - julia -e 'Pkg.clone(pwd()); Pkg.build("Voronoi"); Pkg.test("Voronoi"; coverage=true)'

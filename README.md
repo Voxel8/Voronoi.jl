@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/Voxel8/Voronoi.jl.svg?branch=master)](https://travis-ci.org/Voxel8/Voronoi.jl)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/0uy0q4prxwon3gee?svg=true)](https://ci.appveyor.com/project/maxvoxel8/voronoi-jl)
+[![Build status](https://ci.appveyor.com/api/projects/status/0tacpn1wpke3am0m?svg=true)](https://ci.appveyor.com/project/Voxel8/voronoi-jl)
 
 # Voronoi
 
